@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FlexiLearn AI - Quiz</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="quiz-container">
+
+  <h2>Quiz Time 📝</h2>
+
+  <!-- QUESTION -->
+  <div class="question-card">
+    <p id="question"></p>
+  </div>
+
+  <!-- OPTIONS -->
+  <div id="options" class="options-container"></div>
+
+  <!-- FEEDBACK -->
+  <p id="feedback"></p>
+
+  <!-- NAVIGATION -->
+  <div class="nav-buttons">
+    <button onclick="prevQuestion()">⬅ Previous</button>
+    <button onclick="nextQuestion()">Next ➡</button>
+  </div>
+
+  <!-- PROGRESS -->
+  <p id="progress"></p>
+
+</div>
+
+<script src="js/quiz.js"></script>
+<a href="history.html" class="history-btn">History</a>
+
+</body>
+
+</html>

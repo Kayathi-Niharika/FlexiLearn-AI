@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FlexiLearn AI</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Top Right History Button -->
+
+<a href="history.html" class="history-btn">History</a>
+
+<div class="container">
+
+  <!-- Logo -->
+  <div class="logo">
+    🎓
+  </div>
+
+  <h1>FlexiLearn AI</h1>
+  <p class="subtitle">Your personal AI learning companion</p>
+
+  <h3 class="section-title">✨ Start Learning</h3>
+
+  <!-- Input Box -->
+  <div class="input-wrapper">
+  <input
+    type="text"
+    id="topic"
+    placeholder="e.g. Quantum Computing, Climate Change, Machine Learning..."
+  />
+
+  <span class="input-icons">
+    🎤
+    📎
+  </span>
+</div>
+
+
+  <!-- Interest -->
+  <label>Select your area of interest</label>
+
+<select id="interest" onchange="handleInterestChange()">
+  <option value="">-- Select your interest --</option>
+  <option value="Cricket">Cricket</option>
+  <option value="Football">Football</option>
+  <option value="Gaming">Gaming</option>
+  <option value="Movies">Movies</option>
+  <option value="Music">Music</option>
+  <option value="Technology">Technology</option>
+  <option value="Others">Others</option>
+</select>
+
+<input
+  type="text"
+  id="customInterest"
+  placeholder="Enter your interest..."
+  style="display: none; margin-top: 10px;"
+/>
+
+
+
+  <button onclick="generate()">✨ Generate Personalized Lesson</button>
+
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/quiz.js"></script>
+</body>
+
+</html>
