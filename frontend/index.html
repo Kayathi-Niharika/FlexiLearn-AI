@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FlexiLearn AI</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <!-- Top Right History Button -->
-
+ 
 <a href="history.html" class="history-btn">History</a>
 
 <div class="container">
@@ -24,48 +26,57 @@
 
   <!-- Input Box -->
   <div class="input-wrapper">
-  <input
-    type="text"
-    id="topic"
-    placeholder="e.g. Quantum Computing, Climate Change, Machine Learning..."
-  />
+    <input
+      type="text"
+      id="topic"
+      placeholder="e.g. Quantum Computing, Climate Change, Machine Learning..."
+    />
 
-  <span class="input-icons">
-    🎤
-    📎
-  </span>
-</div>
+    <!-- ✅ ICONS FIXED (onclick added) -->
+    <span class="input-icons">
+  <span id="voiceIcon">🎤</span>
+  <span id="uploadIcon">📎</span>
+</span>
+
+
+  </div>
+
+  <!-- Hidden file input -->
+  <input
+  type="file"
+  id="fileInput"
+  accept=".txt,.pdf,.docx,.md,.json,image/*"
+  style="display: none;"
+/>
 
 
   <!-- Interest -->
   <label>Select your area of interest</label>
 
-<select id="interest" onchange="handleInterestChange()">
-  <option value="">-- Select your interest --</option>
-  <option value="Cricket">Cricket</option>
-  <option value="Football">Football</option>
-  <option value="Gaming">Gaming</option>
-  <option value="Movies">Movies</option>
-  <option value="Music">Music</option>
-  <option value="Technology">Technology</option>
-  <option value="Others">Others</option>
-</select>
+  <select id="interest" onchange="handleInterestChange()">
+    <option value="">-- Select your interest --</option>
+    <option value="Cricket">Cricket</option>
+    <option value="Football">Football</option>
+    <option value="Gaming">Gaming</option>
+    <option value="Movies">Movies</option>
+    <option value="Music">Music</option>
+    <option value="Technology">Technology</option>
+    <option value="Others">Others</option>
+  </select>
 
-<input
-  type="text"
-  id="customInterest"
-  placeholder="Enter your interest..."
-  style="display: none; margin-top: 10px;"
-/>
-
-
+  <input
+    type="text"
+    id="customInterest"
+    placeholder="Enter your interest..."
+    style="display: none; margin-top: 10px;"
+  />
 
   <button onclick="generate()">✨ Generate Personalized Lesson</button>
 
 </div>
 
 <script src="js/main.js"></script>
-<script src="js/quiz.js"></script>
+
 </body>
 
 </html>

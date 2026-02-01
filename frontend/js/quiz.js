@@ -1,39 +1,42 @@
-const quizData = [
-  {
-    question: "What does the topic mainly explain?",
-    options: ["A force", "A process", "A concept", "An object"],
-    correct: 2,
-    explanation: "The topic explains a concept."
-  },
-  {
-    question: "Where is this concept commonly used?",
-    options: ["Only textbooks", "Real life", "Only exams", "Only labs"],
-    correct: 1,
-    explanation: "Concepts are applied in real-life situations."
-  },
-  {
-    question: "Why is this concept important?",
-    options: ["Marks only", "Basic understanding", "Memorization", "Entertainment"],
-    correct: 1,
-    explanation: "Basic understanding helps advanced learning."
-  },
-  {
-    question: "Which is a correct real-life example?",
-    options: ["Random task", "Imaginary case", "Practical situation", "Unrelated task"],
-    correct: 2,
-    explanation: "Practical situations best explain concepts."
-  },
-  {
-    question: "What should you do if confused?",
-    options: ["Ignore", "Skip topic", "Revise & practice", "Quit subject"],
-    correct: 2,
-    explanation: "Revision improves understanding."
-  }
-];
-
+let quizData = [];
 let currentQuestion = 0;
 let score = 0;
 let userAnswers = [];
+
+// =======================
+// LOAD QUIZ FROM BACKEND
+// =======================
+
+async function loadQuiz() {
+  const topic = localStorage.getItem("topic");
+  const interest = localStorage.getItem("interest");
+
+  if (!topic || !interest) {
+    alert("No quiz data found. Please generate a lesson first.");
+    window.location.href = "index.html";
+    return;
+  }
+
+  const response = await fetch("http://127.0.0.1:8000/quiz", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ topic, interest })
+  });
+
+  quizData = await response.json();
+
+  if (quizData.length === 0) {
+    alert("No quiz available for this topic.");
+    window.location.href = "explanation.html";
+    return;
+  }
+
+  loadQuestion();
+}
+
+// =======================
+// LOAD QUESTION
+// =======================
 
 function loadQuestion() {
   document.getElementById("feedback").innerText = "";
@@ -54,11 +57,14 @@ function loadQuestion() {
   document.getElementById("progress").innerText =
     `Question ${currentQuestion + 1} of ${quizData.length}`;
 
-  // 🔁 Reapply previous answer if exists
   if (userAnswers[currentQuestion] !== undefined) {
     applyPreviousAnswer();
   }
 }
+
+// =======================
+// SELECT OPTION
+// =======================
 
 function selectOption(index) {
   if (userAnswers[currentQuestion] !== undefined) return;
@@ -86,6 +92,10 @@ function selectOption(index) {
     "Explanation: " + quizData[currentQuestion].explanation;
 }
 
+// =======================
+// REAPPLY ANSWER
+// =======================
+
 function applyPreviousAnswer() {
   const selected = userAnswers[currentQuestion];
   const correctIndex = quizData[currentQuestion].correct;
@@ -107,6 +117,10 @@ function applyPreviousAnswer() {
     "Explanation: " + quizData[currentQuestion].explanation;
 }
 
+// =======================
+// NAVIGATION
+// =======================
+
 function nextQuestion() {
   if (userAnswers[currentQuestion] === undefined) {
     alert("Please select an option");
@@ -119,23 +133,21 @@ function nextQuestion() {
     loadQuestion();
   } else {
     document.body.innerHTML = `
-  <!-- Top Navigation -->
-  <a href="index.html" class="home-btn">⬅ Home</a>
-  <a href="history.html" class="history-btn">History</a>
+      <a href="index.html" class="home-btn">⬅ Home</a>
+      <a href="history.html" class="history-btn">History</a>
 
-  <div class="quiz-container">
-    <h2>Quiz Completed 🎉</h2>
-    <p>Your Score: ${score} / ${quizData.length}</p>
+      <div class="quiz-container">
+        <h2>Quiz Completed 🎉</h2>
+        <p>Your Score: ${score} / ${quizData.length}</p>
 
-    <div class="result-buttons">
-      <button onclick="location.reload()">🔁 Retake Quiz</button>
-      <button onclick="window.location.href='explanation.html'">
-        📘 Back to Explanation
-      </button>
-    </div>
-  </div>
-`;
-
+        <div class="result-buttons">
+          <button onclick="location.reload()">🔁 Retake Quiz</button>
+          <button onclick="window.location.href='explanation.html'">
+            📘 Back to Explanation
+          </button>
+        </div>
+      </div>
+    `;
   }
 }
 
@@ -146,4 +158,8 @@ function prevQuestion() {
   }
 }
 
-loadQuestion();
+// =======================
+// INIT
+// =======================
+
+loadQuiz();

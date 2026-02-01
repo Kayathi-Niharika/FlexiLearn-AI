@@ -6,19 +6,64 @@
 </head>
 <body>
 
+<!-- Top Right History Button -->
 <a href="history.html" class="history-btn">History</a>
 
 <div class="container">
-  <h2>Explanation</h2>
-  <p id="explanationText"></p>
 
-  <a href="quiz.html">
-    <button>📝 Take Quiz</button>
-  </a>
+  <h2>📘 Explanation</h2>
 
-  <a href="index.html">⬅ Back to Home</a>
+  <!-- Explanation Box -->
+  <div class="explanation-container">
+    <!-- Voice Controls -->
+<div class="voice-controls">
+  <button onclick="speakExplanation()">🔊 Listen</button>
+  <button onclick="stopSpeaking()">⏹ Stop</button>
+</div>
+
+    <div id="explanationText" class="explanation-text"></div>
+  </div>
+<!-- 🎥 Animated Explanation Controls -->
+<div class="video-controls">
+  <button onclick="playAnimatedExplanation()">▶ Play Animation</button>
+  <button onclick="stopAnimatedExplanation()">⏹ Stop</button>
+</div>
+
+<!-- 🎞 Animation Screen -->
+<div id="videoScreen" class="animation-screen">
+  Click ▶ Play to start animated explanation
+</div>
+
+
+
+  <!-- Actions -->
+  <div class="action-buttons">
+    <a href="quiz.html">
+      <button>📝 Take Quiz</button>
+    </a>
+
+    <a href="index.html" class="back-home">⬅ Back to Home</a>
+  </div>
+
+  <!-- Explore Further -->
+  <div class="explore-box">
+  <h3>Want to explore this topic further?</h3>
+
+  <textarea
+    id="followup"
+    placeholder="Ask your doubt here..."
+    rows="3"
+  ></textarea>
+
+  <button onclick="askMore()">Ask</button>
+
+  <div id="followupAnswer" class="followup-answer"></div>
+</div>
+
+
 </div>
 
 <script src="js/explanation.js"></script>
+
 </body>
 </html>
